@@ -1,0 +1,18 @@
+{
+    "name": "communes-bot-twitter",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "author": "Niall Riordan",
+    "license": "ISC",
+    "dependencies": {
+        "@turf/turf": "^6.5.0",
+        "axios": "^0.27.2",
+        "dotenv": "^16.0.0",
+        "geojson-polyline": "^1.0.3",
+        "twitter-api-client": "^1.5.2"
+    },
+    "devDependencies": {
+        "prettier": "2.6.2"
+    }
+}
