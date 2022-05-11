@@ -9,5 +9,5 @@ exports.encodePolygon = geojson => {
 }
 
 exports.simplifyPolygon = geojson => {
-    return geojson.coordinates[0].length ? turf.simplify(geojson, { tolerance: 0.0005, highQuality: true }) : geojson
+    return geojson.coordinates[0].length > 300 ? turf.simplify(geojson, { tolerance: 0.0005, highQuality: true }) : geojson
 }
