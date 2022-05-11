@@ -21,6 +21,7 @@ exports.getImagery = async ({ type, polygon, commune }) => {
             ...commonParams,
             ...(isMetropole ? { he: 1 } : { centrePoint, zoomLevel }),
             c: locale,
+            ms: '400,400',
             pp: `${centrePoint};${pushpinStyle}`
         }
     } else {
@@ -34,6 +35,7 @@ exports.getImagery = async ({ type, polygon, commune }) => {
         params = {
             ...commonParams,
             mapArea,
+            ms: '600,600',
             dc: `p,${fillColor},${outlineColor},${outlineThickness};enc:${encodedPolygon}`
         }
     }
