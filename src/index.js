@@ -17,7 +17,7 @@ exports.handler = async function() {
         ])
 
         const tweetMessage =
-            `Nom: ${commune.nom}\n` +
+            `Nom : ${commune.nom}\n` +
             `Population : ${commune.population}\n` +
             `Departement : ${commune.departement.nom}, Région : ${commune.region.nom}`
 
