@@ -14,6 +14,8 @@ resource "aws_lambda_function" "tweeting_lambda" {
 
   runtime = "nodejs14.x"
 
+  timeout = 10
+
   environment {
     variables = {
       TWITTER_API_KEY             = var.twitter_api_key
