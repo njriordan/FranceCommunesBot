@@ -1,8 +1,8 @@
 
 resource "aws_cloudwatch_event_rule" "schedule_rule" {
   name                = "communes-bot-chron"
-  description         = "Fires once per hour"
-  schedule_expression = "rate(1 hour)"
+  description         = "Fires once every 2 hours"
+  schedule_expression = "rate(2 hours)"
 }
 
 resource "aws_cloudwatch_event_target" "check_foo_every_one_minute" {
