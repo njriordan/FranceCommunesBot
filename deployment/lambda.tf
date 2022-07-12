@@ -1,6 +1,6 @@
 data "archive_file" "lambda" {
   type        = "zip"
-  source_dir  = "${path.root}/../src"
+  source_dir  = "${path.root}/../build"
   output_path = "./.terraform/lambda.zip"
 }
 

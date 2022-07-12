@@ -7,12 +7,20 @@
     "license": "ISC",
     "dependencies": {
         "@turf/turf": "^6.5.0",
+        "aws-lambda": "^1.0.7",
         "axios": "^0.27.2",
         "dotenv": "^16.0.0",
         "geojson-polyline": "^1.0.3",
         "twitter-api-client": "^1.5.2"
     },
     "devDependencies": {
-        "prettier": "2.6.2"
+        "@types/aws-lambda": "^8.10.101",
+        "@types/node": "^18.0.3",
+        "prettier": "2.6.2",
+        "typescript": "^4.7.4"
+    },
+    "scripts": {
+        "build": "tsc",
+        "postbuild": "cp package.json ../build/package.json && cp package-lock.json ../build/package-lock.json && cp -r data ../build/data && cd ../build && npm i --omit=dev"
     }
 }

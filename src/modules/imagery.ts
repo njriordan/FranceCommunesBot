@@ -1,15 +1,39 @@
-const axios = require('axios')
-const turf = require('@turf/turf')
-const { encodePolygon } = require('./polygons')
+import axios from 'axios'
+import * as turf from '@turf/turf'
+import { encodePolygon } from './polygons'
+import { Commune } from './communes'
 
-exports.getImagery = async ({ type, polygon, commune }) => {
+interface GetImageryParams {
+    type: 'overview' | 'contour'
+    polygon: turf.Geometry
+    commune: Commune
+}
+
+interface BingApiParams {
+    key: string
+    imagerySet: string
+    format: string
+    mapArea?: string
+    ms: string
+    dc?: string
+    c?: string
+    he?: number
+    centrePoint?: string
+    zoomLevel?: number
+    pp?: string
+}
+
+export async function getImagery({ type, polygon, commune }: GetImageryParams): Promise<Buffer> {
+    if (!process.env.BING_API_KEY) {
+        throw Error('Missing BING API environment variable')
+    }
     const baseUrl = 'https://dev.virtualearth.net/REST/v1/Imagery/Map'
     const commonParams = {
         key: process.env.BING_API_KEY,
         imagerySet: 'Aerial',
         format: 'png'
     }
-    let params, url
+    let params: BingApiParams, url
     if (type === 'overview') {
         const isMetropole = commune.departement.code.length < 3
         url = isMetropole ? `${baseUrl}/Road/France` : `${baseUrl}/Road`
@@ -41,12 +65,13 @@ exports.getImagery = async ({ type, polygon, commune }) => {
     }
 
     try {
-        const result = await axios.get(url, {
+        const result = await axios.get<Buffer>(url, {
             params,
             responseType: 'arraybuffer'
         })
         return result.data
     } catch (err) {
         console.log('Unable to retrieve data for commune', { type }, err)
+        throw err
     }
 }
